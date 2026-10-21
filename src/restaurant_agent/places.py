@@ -84,7 +84,7 @@ class PlacesClient:
         return [parse_place(p) for p in data.get("places", [])]
 
     def find_area(self, name: str, near: LatLng | None = None) -> Box | None:
-        """The map box of a named area ("Gunjur, Bangalore"), widened by
+        """The map box of a named area ("Indiranagar, Bangalore"), widened by
         AREA_PADDING_KM, or None if Google doesn't know it. Cached per name.
         """
         key = (name.strip().lower(), near)

@@ -6,7 +6,7 @@ from restaurant_agent.nodes.search import build_query, make_search_restaurants
 from restaurant_agent.places import MAX_RADIUS_M, box_around
 
 HOME = (12.97, 77.59)
-GUNJUR_BOX = ((12.90, 77.70), (12.95, 77.76))
+INDIRANAGAR_BOX = ((12.96, 77.63), (12.99, 77.66))
 
 
 class FakeClient:
@@ -32,7 +32,7 @@ class FakeClient:
         ("South Indian", None, None, "South Indian restaurant"),
         (None, "Koramangala", None, "restaurant in Koramangala"),
         (None, None, None, "restaurant"),
-        ("dosa", "Gunjur", "vegetarian", "vegetarian dosa restaurant in Gunjur"),
+        ("dosa", "Indiranagar", "vegetarian", "vegetarian dosa restaurant in Indiranagar"),
     ],
 )
 def test_build_query(cuisine, location, diet, expected):
@@ -53,13 +53,13 @@ def test_near_me_stays_within_radius_of_default_location():
 
 
 def test_named_location_stays_within_that_area():
-    client = FakeClient(areas={"Gunjur": GUNJUR_BOX})
+    client = FakeClient(areas={"Indiranagar": INDIRANAGAR_BOX})
     node = make_search_restaurants(client, default_location=HOME)
 
-    node({"location": "Gunjur", "cuisine": "dosa", "min_rating": None})
+    node({"location": "Indiranagar", "cuisine": "dosa", "min_rating": None})
 
-    assert client.area_lookups == [("Gunjur", HOME)]
-    assert client.calls == [("dosa restaurant in Gunjur", {"within": GUNJUR_BOX, "min_rating": None})]
+    assert client.area_lookups == [("Indiranagar", HOME)]
+    assert client.calls == [("dosa restaurant in Indiranagar", {"within": INDIRANAGAR_BOX, "min_rating": None})]
 
 
 def test_unknown_area_falls_back_to_preferring_results_near_home():
@@ -72,13 +72,13 @@ def test_unknown_area_falls_back_to_preferring_results_near_home():
 
 
 def test_named_location_works_without_default_location():
-    client = FakeClient(areas={"Gunjur": GUNJUR_BOX})
+    client = FakeClient(areas={"Indiranagar": INDIRANAGAR_BOX})
     node = make_search_restaurants(client, default_location=None)
 
-    node({"location": "Gunjur", "cuisine": None, "min_rating": None})
+    node({"location": "Indiranagar", "cuisine": None, "min_rating": None})
 
-    assert client.area_lookups == [("Gunjur", None)]
-    assert client.calls[0][1]["within"] == GUNJUR_BOX
+    assert client.area_lookups == [("Indiranagar", None)]
+    assert client.calls[0][1]["within"] == INDIRANAGAR_BOX
 
 
 def test_near_me_without_default_location_fails_clearly():

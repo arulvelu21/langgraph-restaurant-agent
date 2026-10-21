@@ -16,7 +16,7 @@ Only fill a field if the user stated it. Otherwise leave it null; never guess.
 - diet: a dietary need for this search, e.g. "vegetarian", "vegan", "Jain", "halal".
 
 remember: facts about the user that hold beyond this one search, e.g. "I'm
-vegetarian", "I live in Gunjur, Bangalore", "remember my budget is ₹500", "I only
+vegetarian", "I live in Indiranagar, Bangalore", "remember my budget is ₹500", "I only
 want places rated 4+". Put a home or usual area in home_location. A one-off
 detail ("tonight", "this time", or just part of the request) is NOT remembered.
 A remembered fact that applies to this search also goes in the search fields

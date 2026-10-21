@@ -114,10 +114,10 @@ def test_llm_finds_none_relevant():
 
 def test_preferences_saved_in_one_thread_apply_in_another():
     model = FakeModel([
-        Preferences(location="Gunjur", cuisine="dosa", diet="vegetarian",
+        Preferences(location="Indiranagar", cuisine="dosa", diet="vegetarian",
                     remember=UserPreferences(diet="vegetarian")),
-        Preferences(location="Gunjur", cuisine="biryani"),
-        Preferences(location="Gunjur", cuisine="biryani"),
+        Preferences(location="Indiranagar", cuisine="biryani"),
+        Preferences(location="Indiranagar", cuisine="biryani"),
     ], LLMRanking(picks=[Pick(number=1, reason="r")]))
     places = FakePlaces([place("a")])
     graph = build_graph(model=model, places_client=places, checkpointer=InMemorySaver(),
@@ -127,18 +127,18 @@ def test_preferences_saved_in_one_thread_apply_in_another():
         return graph.invoke({"user_query": query}, {"configurable": {"thread_id": thread}},
                             context=Context(user_id=user))
 
-    first = ask("I'm vegetarian, dosa in Gunjur", "t1")
-    second = ask("biryani in Gunjur", "t2")
-    other_user = ask("biryani in Gunjur", "t3", user="priya")
+    first = ask("I'm vegetarian, dosa in Indiranagar", "t1")
+    second = ask("biryani in Indiranagar", "t2")
+    other_user = ask("biryani in Indiranagar", "t3", user="priya")
 
     assert first["new_preferences"] == {"diet": "vegetarian"}
     assert second["diet"] == "vegetarian"
     assert second["user_preferences"] == {"diet": "vegetarian"}
     assert other_user["diet"] is None
     assert places.queries == [
-        "vegetarian dosa restaurant in Gunjur",
-        "vegetarian biryani restaurant in Gunjur",
-        "biryani restaurant in Gunjur",
+        "vegetarian dosa restaurant in Indiranagar",
+        "vegetarian biryani restaurant in Indiranagar",
+        "biryani restaurant in Indiranagar",
     ]
 
 
@@ -184,7 +184,7 @@ def test_near_me_without_any_location_asks_where():
 
 def test_near_me_uses_saved_home_without_default_location():
     model = FakeModel([
-        Preferences(remember=UserPreferences(home_location="Gunjur, Bangalore")),
+        Preferences(remember=UserPreferences(home_location="Indiranagar, Bangalore")),
         Preferences(cuisine="dosa"),
     ], LLMRanking(picks=[Pick(number=1, reason="r")]))
     places = FakePlaces([place("a")])
@@ -192,10 +192,10 @@ def test_near_me_uses_saved_home_without_default_location():
                         store=InMemoryStore(), default_location=None)
     config = {"configurable": {"thread_id": "t1"}}
 
-    graph.invoke({"user_query": "I live in Gunjur, Bangalore"}, config)
+    graph.invoke({"user_query": "I live in Indiranagar, Bangalore"}, config)
     result = graph.invoke({"user_query": "dosa near me"}, config)
 
-    assert places.queries[-1] == "dosa restaurant in Gunjur, Bangalore"
+    assert places.queries[-1] == "dosa restaurant in Indiranagar, Bangalore"
     assert result["recommendations"][0]["id"] == "a"
 
 

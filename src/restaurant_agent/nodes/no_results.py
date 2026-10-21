@@ -16,7 +16,7 @@ def ask_for_location(state: RestaurantState) -> dict:
     """The request is for somewhere near the user, but we don't know where they are."""
     return {
         "recommendations": [],
-        "message": "Where should I look? Name an area (e.g. \"dosa in Gunjur, Bangalore\"), "
+        "message": "Where should I look? Name an area (e.g. \"dosa in Indiranagar, Bangalore\"), "
         "or tell me \"I live in <area>\" and I'll remember it for \"near me\" searches.",
     }
 

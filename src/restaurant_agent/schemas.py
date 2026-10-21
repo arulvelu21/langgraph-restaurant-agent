@@ -8,7 +8,7 @@ class UserPreferences(BaseModel):
 
     home_location: str | None = Field(
         default=None,
-        description="Where the user lives or usually eats, e.g. 'Gunjur, Bengaluru'. "
+        description="Where the user lives or usually eats, e.g. 'Indiranagar, Bengaluru'. "
         "Used for 'near me' searches.",
     )
     diet: str | None = Field(

@@ -21,14 +21,14 @@ pytestmark = pytest.mark.skipif(not DATABASE_URL, reason="DATABASE_URL not set")
 def test_state_and_preferences_survive_reconnect():
     user = f"test-{uuid.uuid4()}"
     config = {"configurable": {"thread_id": f"{user}:t1"}}
-    prefs = Preferences(location="Gunjur", cuisine="dosa", diet="vegetarian",
+    prefs = Preferences(location="Indiranagar", cuisine="dosa", diet="vegetarian",
                         remember=UserPreferences(diet="vegetarian"))
     model = FakeModel([prefs], LLMRanking(picks=[Pick(number=1, reason="r")]))
 
     with open_persistence(DATABASE_URL) as (checkpointer, store):
         graph = build_graph(model=model, places_client=FakePlaces([place("a")]),
                             checkpointer=checkpointer, store=store)
-        graph.invoke({"user_query": "I'm vegetarian, dosa in Gunjur"}, config,
+        graph.invoke({"user_query": "I'm vegetarian, dosa in Indiranagar"}, config,
                      context=Context(user_id=user))
 
     # Fresh connections, like restarting the app.

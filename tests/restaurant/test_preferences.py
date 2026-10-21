@@ -23,10 +23,10 @@ def test_saves_new_preferences_and_merges_with_old():
     store = InMemoryStore()
     store.put(namespace("arul"), KEY, {"diet": "vegetarian", "budget": 500})
 
-    update = run({**EMPTY_SEARCH, "new_preferences": {"budget": 600, "home_location": "Gunjur"}},
+    update = run({**EMPTY_SEARCH, "new_preferences": {"budget": 600, "home_location": "Indiranagar"}},
                  store)
 
-    expected = {"diet": "vegetarian", "budget": 600, "home_location": "Gunjur"}
+    expected = {"diet": "vegetarian", "budget": 600, "home_location": "Indiranagar"}
     assert saved(store) == expected
     assert update["user_preferences"] == expected
 
@@ -34,12 +34,12 @@ def test_saves_new_preferences_and_merges_with_old():
 def test_fills_empty_fields_from_saved_preferences():
     store = InMemoryStore()
     store.put(namespace("arul"), KEY, {"diet": "vegetarian", "budget": 500, "min_rating": 4.0,
-                                       "home_location": "Gunjur, Bengaluru"})
+                                       "home_location": "Indiranagar, Bengaluru"})
 
     update = run(EMPTY_SEARCH, store)
 
     assert {k: update[k] for k in ("location", "diet", "budget", "min_rating")} == {
-        "location": "Gunjur, Bengaluru",
+        "location": "Indiranagar, Bengaluru",
         "diet": "vegetarian",
         "budget": 500,
         "min_rating": 4.0,
@@ -48,7 +48,7 @@ def test_fills_empty_fields_from_saved_preferences():
 
 def test_request_values_win_over_saved():
     store = InMemoryStore()
-    store.put(namespace("arul"), KEY, {"budget": 500, "home_location": "Gunjur"})
+    store.put(namespace("arul"), KEY, {"budget": 500, "home_location": "Indiranagar"})
 
     update = run({**EMPTY_SEARCH, "location": "Koramangala", "budget": 1200}, store)
 
