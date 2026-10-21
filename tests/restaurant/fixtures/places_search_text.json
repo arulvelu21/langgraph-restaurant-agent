@@ -1,0 +1,42 @@
+{
+  "places": [
+    {
+      "id": "test-place-1",
+      "displayName": {"text": "Test Dosa House", "languageCode": "en"},
+      "formattedAddress": "1 Test Road, Indiranagar, Bengaluru, Karnataka 560038, India",
+      "location": {"latitude": 12.9784, "longitude": 77.6408},
+      "rating": 4.6,
+      "userRatingCount": 3120,
+      "priceLevel": "PRICE_LEVEL_INEXPENSIVE",
+      "primaryTypeDisplayName": {"text": "South Indian Restaurant", "languageCode": "en"},
+      "reviewSummary": {
+        "text": {"text": "Diners praise the crisp ghee dosa and filter coffee.", "languageCode": "en-US"}
+      },
+      "priceRange": {
+        "startPrice": {"currencyCode": "INR", "units": "200"},
+        "endPrice": {"currencyCode": "INR", "units": "400"}
+      },
+      "businessStatus": "OPERATIONAL",
+      "googleMapsUri": "https://maps.google.com/?cid=1"
+    },
+    {
+      "id": "test-place-2",
+      "displayName": {"text": "Test Meals Mess", "languageCode": "en"},
+      "formattedAddress": "2 Test Street, Bengaluru, Karnataka 560001, India",
+      "location": {"latitude": 12.9716, "longitude": 77.5946},
+      "rating": 4.3,
+      "userRatingCount": 48,
+      "priceLevel": "PRICE_LEVEL_MODERATE",
+      "businessStatus": "OPERATIONAL",
+      "googleMapsUri": "https://maps.google.com/?cid=2"
+    },
+    {
+      "id": "test-place-3",
+      "displayName": {"text": "Test Closed Cafe", "languageCode": "en"},
+      "formattedAddress": "3 Test Lane, Bengaluru, Karnataka 560002, India",
+      "location": {"latitude": 12.9650, "longitude": 77.6000},
+      "businessStatus": "CLOSED_PERMANENTLY",
+      "googleMapsUri": "https://maps.google.com/?cid=3"
+    }
+  ]
+}
